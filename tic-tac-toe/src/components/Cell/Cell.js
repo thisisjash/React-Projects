@@ -4,16 +4,15 @@ import classNames from 'classnames'
 import "./Cell.css";
 
 export const Cell = (props) => {
-  let cellContentClasses = 'cell-content';
-  let cellClasses = 'cell';
-
-  if (props.value) {
-    cellContentClasses += ' populated';
-  }
-
-  if (props.canHighlight) {
-    cellClasses += ' winner';
-  }
+  const cellContentClasses = classNames ({
+    'cell-content': true,
+    populated: props.value
+  });
+  
+  const cellClasses = classNames ({
+    cell: true,
+    winner: props.canHighlight
+  });
   
   return (
     <button className={cellClasses}>
