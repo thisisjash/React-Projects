@@ -3,18 +3,19 @@ import React from "react";
 import { Cell } from "../Cell/Cell";
 import "./Board.css";
 
-export const Board = () => {
-  return (
-    <div id="board">
-      <Cell value = "X" canHighlight = {false}/>
-      <Cell value = "O" canHighlight = {true}/>
-      <Cell value = "X" canHighlight = {false}/>
-      <Cell value = "X" canHighlight = {false}/>
-      <Cell value = "O" canHighlight = {true}/>
-      <Cell value = "X" canHighlight = {false}/>
-      <Cell value = "" canHighlight = {false}/>
-      <Cell value = "O" canHighlight = {true}/>
-      <Cell value = "O" canHighlight = {false}/>
-    </div>
-  );
+export const Board = (props) => {
+  const cells = props.cellValues.map((value, index) => {
+    const canHighlight =
+      props.winningCombination && props.winningCombination.indexOf(index) >= 0;
+    return (
+      <Cell
+        key={index}
+        value={value}
+        canHighlight={canHighlight}
+        onClick={() => props.cellClicked(index)}
+      />
+    );
+  });
+
+  return <div id="board">{cells}</div>;
 };
